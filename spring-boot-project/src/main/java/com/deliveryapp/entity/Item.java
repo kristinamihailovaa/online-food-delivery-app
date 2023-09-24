@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @Getter
@@ -30,4 +32,8 @@ public class Item {
     @OneToOne(mappedBy = "item")
     @JsonBackReference
     ItemImage itemImages;
+
+    @OneToMany(mappedBy = "product")
+    @JsonBackReference
+    private List<OrderedItems> orderedProducts;
 }

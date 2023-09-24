@@ -1,12 +1,10 @@
 package com.deliveryapp.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -15,7 +13,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "orders_have_items")
 public class OrderedItems {
-    @Id
-    private Long id;
+    @Embeddable
+    @Data
+    public static class OrderedItemsKey implements Serializable {
+        long orderId;
+        long itemId;
+    }
+
+    @EmbeddedId
+    private OrderedItemsKey primaryKey;
+
+    @ManyToOne
+    @MapsId("orderId")
+    @JsonManagedReference
+    @JoinColumn(name = "order_id")
+    Order order;
+
+    @ManyToOne
+    @MapsId("itemId")
+    @JsonManagedReference
+    @JoinColumn(name = "item_id")
+    Item item;
+
+    private int quantity;
 
 }
