@@ -7,6 +7,8 @@ import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 @Entity
@@ -17,32 +19,14 @@ import java.io.Serializable;
 @Table(name = "users_has_products_in_cart")
 public class UserCart {
 
-    @Embeddable
-    @Data
-    public static class UserCartKey implements Serializable {
-        @Column(name = "user_id")
-        private long userId;
-        @Column(name = "item_id")
-        private long itemId;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long cartId;
 
-    @EmbeddedId
-    private UserCartKey primaryKey;
+    @OneToOne(targetEntity = User.class, mappedBy = "cart")
+    private User user;
 
-    @ManyToOne
-    @JsonIgnore
-//    @JsonManagedReference
-    @MapsId("userId")
-    @JoinColumn(name = "user_id")
-    User user;
-
-    @ManyToOne
-    @JsonManagedReference
-    @MapsId("itemId")
-    @JoinColumn(name = "item_id")
-    Item item;
-
-    private int quantity;
-    private double grandTotal;
+    @OneToMany(targetEntity = Item.class)
+    private List<Item> itemList;
 
 }
