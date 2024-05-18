@@ -19,13 +19,20 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(name = "ID")
+    private Long id;
+
     private String name;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
 
+    @Column(name = "DESCRIPTION")
     private String description;
+    @Column(name = "PRICE")
     private double price;
+
+    @Column(name = "QUANTITY")
     private int quantity;
 
 
@@ -33,7 +40,7 @@ public class Item {
     @JsonBackReference
     ItemImage itemImages;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "item")
     @JsonBackReference
-    private List<OrderedItems> orderedProducts;
+    private List<OrderedItems> orderedItems;
 }

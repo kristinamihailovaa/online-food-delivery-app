@@ -23,10 +23,19 @@ public class UserCart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cartId;
 
-    @OneToOne(targetEntity = User.class, mappedBy = "cart")
-    private User user;
+    @ManyToOne
+    @JsonIgnore
+//    @JsonManagedReference
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
+    User user;
 
-    @OneToMany(targetEntity = Item.class)
-    private List<Item> itemList;
+    @ManyToOne
+    @JsonManagedReference
+    @MapsId("itemId")
+    @JoinColumn(name = "item_id")
+    Item item;
+
+    private int quantity;
 
 }
