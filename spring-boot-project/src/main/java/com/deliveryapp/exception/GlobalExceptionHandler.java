@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({EntityNotFoundException.class})
     public ExceptionAsJson handleNotFoundException(Exception e) {
-        return new ExceptionAsJson(HttpStatus.FOUND, e.getMessage());
+        return new ExceptionAsJson(HttpStatus.NOT_FOUND, e.getMessage());
     }
 
 
