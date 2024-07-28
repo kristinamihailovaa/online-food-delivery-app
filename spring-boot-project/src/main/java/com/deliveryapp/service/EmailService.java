@@ -1,2 +1,8 @@
-package com.deliveryapp.service;public class EmailService {
+package com.deliveryapp.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmailService {
+
 }
