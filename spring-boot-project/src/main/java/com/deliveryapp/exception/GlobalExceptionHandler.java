@@ -15,6 +15,11 @@ public class GlobalExceptionHandler {
     public ExceptionAsJson handleNotFoundException(Exception e) {
         return new ExceptionAsJson(HttpStatus.NOT_FOUND, e.getMessage());
     }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ExceptionAsJson handleIllegalArgumentException(Exception e) {
+        return new ExceptionAsJson(HttpStatus.BAD_REQUEST, e.getMessage());
+    }
 
 
 

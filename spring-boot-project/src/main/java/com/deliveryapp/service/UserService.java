@@ -69,7 +69,13 @@ public class UserService {
             throw new IllegalAccessException(String.format("Invalid email format!: "
                     + dto.getEmail()));
         }
+        if (!UserUtils.isPasswordMatch(dto.getPassword(), dto.getConfirmPassword())) {
+            throw new BadRequestException("Passwords mismatch!");
+        }
+        if (!UserUtils.isValidName(dto.getFullName())) {
+            throw new BadRequestException("Invalid name format!");
+        }
 
-
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package com.deliveryapp.controller;
 
+import com.deliveryapp.exception.BadRequestException;
 import com.deliveryapp.model.dto.user.LoginRequestUserDTO;
 import com.deliveryapp.model.dto.user.RegisterUserRequestDto;
 import com.deliveryapp.model.dto.user.UserResponseDto;
@@ -47,7 +48,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterUserRequestDto dto, HttpSession session) throws IllegalAccessException {
+    public ResponseEntity<?> register(@RequestBody @Valid RegisterUserRequestDto dto, HttpSession session) throws IllegalAccessException, BadRequestException {
 //        sessionManager.isLoggedVerification(session);
         return ResponseEntity.ok(userService.registerUser(dto));
     }
