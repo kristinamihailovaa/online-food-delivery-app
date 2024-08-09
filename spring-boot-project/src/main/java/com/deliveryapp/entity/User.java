@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -38,9 +39,9 @@ public class User {
     @ManyToMany
     @JsonManagedReference
     @JoinTable(
-            name="users_addresses",
-            joinColumns = {@JoinColumn(name="user_id")},
-            inverseJoinColumns = {@JoinColumn(name="address_id")}
+            name = "users_addresses",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "address_id")}
     )
     private List<Address> addresses;
 
@@ -55,5 +56,8 @@ public class User {
 
     @Column(name = "phonenumber")
     private String phoneNumber;
+
+    @Column(name = "createAt")
+    private Timestamp createAt;
 
 }

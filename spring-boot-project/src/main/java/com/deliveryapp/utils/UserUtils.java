@@ -18,14 +18,10 @@ public class UserUtils {
 
     public static boolean isValidEmail(String email) throws BadRequestException {
         if (StringUtils.isBlank(email)) {
-            throw new BadRequestException("Email is mandatory!");
+            throw new IllegalArgumentException("Email is mandatory!");
         }
         String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
         return email.matches(regex);
-    }
-
-    public static boolean isPasswordMatch(String password, String confirmedPassword) {
-        return password.equals(confirmedPassword);
     }
 
     public static boolean isValidName(String fullName) {
