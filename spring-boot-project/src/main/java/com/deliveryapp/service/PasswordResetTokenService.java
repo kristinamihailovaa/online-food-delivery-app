@@ -21,18 +21,16 @@ public class PasswordResetTokenService {
     public void createPasswordResetTokenForUser(Optional<User> userOptional, String token) {
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            // Намери съществуващ токен за този потребител
+
             PasswordResetToken existingToken = passwordTokenRepository.findByUser(user);
 
             if (existingToken != null) {
-                // Актуализирай съществуващия токен
                 existingToken.setToken(token);
-                existingToken.setExpiryDate(30); // Или друг валиден период
+                existingToken.setExpiryDate(30);
                 passwordTokenRepository.save(existingToken);
             } else {
-                // Създай нов токен, ако няма съществуващ
                 PasswordResetToken newToken = new PasswordResetToken(token, user);
-                newToken.setExpiryDate(30); // Или друг валиден период
+                newToken.setExpiryDate(30);
                 passwordTokenRepository.save(newToken);
             }
         } else {

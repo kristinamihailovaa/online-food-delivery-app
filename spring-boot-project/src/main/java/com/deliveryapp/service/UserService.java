@@ -1,8 +1,10 @@
 package com.deliveryapp.service;
 
+import com.deliveryapp.entity.PasswordResetToken;
 import com.deliveryapp.entity.User;
 import com.deliveryapp.exception.BadRequestException;
 import com.deliveryapp.model.dto.user.*;
+import com.deliveryapp.repository.PasswordTokenRepository;
 import com.deliveryapp.repository.UserRepository;
 import com.deliveryapp.utils.UserUtils;
 import jakarta.mail.MessagingException;
@@ -21,12 +23,15 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     private PasswordResetTokenService passwordResetTokenService;
     private EmailService emailService;
+    private PasswordTokenRepository passwordTokenRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PasswordResetTokenService passwordResetTokenService, EmailService emailService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, PasswordResetTokenService passwordResetTokenService, EmailService emailService,
+                       PasswordTokenRepository passwordTokenRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.passwordResetTokenService = passwordResetTokenService;
         this.emailService = emailService;
+        this.passwordTokenRepository = passwordTokenRepository;
     }
 
     public UserResponseDto login(LoginRequestUserDTO dto) {
@@ -52,13 +57,12 @@ public class UserService {
             try {
                 emailService.sendPasswordResetEmail(user.get().getEmail(), token);
             } catch (MessagingException e) {
-                throw new BadRequestException("Failed to send email");
+                throw new BadRequestException("Failed to send email!");
             }
         } else {
             throw new EntityNotFoundException("User not found with email: + email)");
         }
-//    }
-}
+    }
 
     public RegistrationResponseUserDto registerUser(RegistrationRequestDto dto) throws BadRequestException {
         Optional<User> userFromDb = userRepository.findByEmail(dto.getEmail());
@@ -96,4 +100,18 @@ public class UserService {
     public ResponseEntity<?> editUserData(EditUserDataRequestDto dto) {
         return null;
     }
+
+    public void resetPassword(String token, String newPassword) {
+        PasswordResetToken resetToken = passwordTokenRepository.findByToken(token);
+        if (resetToken == null || resetToken.isExpired()) {
+            throw new IllegalArgumentException("Invalid or expired token.");
+        }
+
+        User user = resetToken.getUser();
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+
+        passwordTokenRepository.delete(resetToken);
+    }
 }
+

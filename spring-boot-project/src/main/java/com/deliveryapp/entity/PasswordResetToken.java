@@ -13,7 +13,6 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PasswordResetToken {
-    private static final int EXPIRATION = 60 * 24;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,6 +60,11 @@ public class PasswordResetToken {
     }
 
     public void setExpiryDate(int minutes) {
-        this.expiryDate = LocalDateTime.now().plusMinutes(minutes);    }
+        this.expiryDate = LocalDateTime.now().plusMinutes(minutes);
+    }
+
+    public boolean isExpired() {
+        return LocalDateTime.now().isAfter(this.expiryDate);
+    }
 }
 
