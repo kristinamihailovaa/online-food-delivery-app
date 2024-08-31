@@ -2,6 +2,7 @@ package com.deliveryapp.service;
 
 import com.deliveryapp.entity.PasswordResetToken;
 import com.deliveryapp.entity.User;
+import com.deliveryapp.exception.AuthenticationException;
 import com.deliveryapp.exception.BadRequestException;
 import com.deliveryapp.model.dto.user.*;
 import com.deliveryapp.repository.PasswordTokenRepository;
@@ -34,19 +35,18 @@ public class UserService {
         this.passwordTokenRepository = passwordTokenRepository;
     }
 
-    public UserResponseDto login(LoginRequestUserDTO dto) {
+    public User authenticateUser(LoginRequestUserDTO dto) throws AuthenticationException {
         String email = dto.getEmail();
         String password = dto.getPassword();
         Optional<User> userFromDb = userRepository.findByEmail(email);
         if (userFromDb.isEmpty()) {
-            throw new EntityNotFoundException("Wrong email!");
+            throw new AuthenticationException("Wrong email!");
         }
         String passwordFromDb = userFromDb.get().getPassword();
         if (!passwordEncoder.matches(password, passwordFromDb)) {
-            throw new EntityNotFoundException("Wrong password!");
+            throw new AuthenticationException("Wrong password!");
         }
-//        return modelMapper.map(userFromDb, UserWithoutPasswordDTO.class);
-        return null;
+        return userFromDb.get();
     }
 
     public void forgottenPassword(String email) throws BadRequestException {
@@ -80,10 +80,6 @@ public class UserService {
         if (!dto.getPassword().equals(dto.getConfirmPassword())) {
             throw new BadRequestException("Passwords mismatch!");
         }
-
-//        if (!UserUtils.isValidName(dto.getFullName())) {
-//            throw new BadRequestException("Invalid name format!");
-//        }
         User user = new User();
         user.setFirstName(dto.getFirstname());
         user.setLastName(dto.getLastname());
@@ -97,8 +93,22 @@ public class UserService {
 
     }
 
-    public ResponseEntity<?> editUserData(EditUserDataRequestDto dto) {
-        return null;
+    public void editUserData(Long userId, EditUserDataRequestDto dto) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+
+        if (!optionalUser.isPresent()) {
+            throw new EntityNotFoundException("User not found");
+        }
+
+        User user = optionalUser.get();
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setEmail(dto.getEmail());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setBirthDate(dto.getBirthDate());
+
+
+        userRepository.save(user);
     }
 
     public void resetPassword(String token, String newPassword) {

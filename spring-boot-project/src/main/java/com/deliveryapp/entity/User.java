@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -34,6 +35,9 @@ public class User {
     @OneToMany(mappedBy = "buyer")
     @JsonBackReference
     private List<Order> orders;
+
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
 
 
     @ManyToMany

@@ -1,10 +1,11 @@
 package com.deliveryapp.controller;
 
+import com.deliveryapp.exception.AuthenticationException;
+import com.deliveryapp.entity.User;
 import com.deliveryapp.exception.BadRequestException;
 import com.deliveryapp.model.dto.user.EditUserDataRequestDto;
 import com.deliveryapp.model.dto.user.LoginRequestUserDTO;
 import com.deliveryapp.model.dto.user.RegistrationRequestDto;
-import com.deliveryapp.model.dto.user.UserResponseDto;
 import com.deliveryapp.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.AuthenticationException;
 import javax.validation.Valid;
 
 @RestController
@@ -36,9 +36,15 @@ public class UserController {
 
     @PostMapping("/users/login")
     public ResponseEntity<?> login(@RequestBody @Valid LoginRequestUserDTO dto, HttpServletRequest request) {
-        UserResponseDto user = userService.login(dto);
-        sessionManager.loginUser(request, user.getId());
-        return ResponseEntity.ok(user);
+        try {
+            User user = userService.authenticateUser(dto);
+            sessionManager.loginUser(request, user.getId());
+            return ResponseEntity.ok("Successfully logged in");
+
+        } catch (AuthenticationException exception) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid username or password");
+        }
     }
 
     @PostMapping("/user/forgotten-password")
@@ -71,12 +77,28 @@ public class UserController {
         return ResponseEntity.ok(userService.registerUser(dto));
     }
 
-    @PutMapping("/profile/edit")
-    public ResponseEntity<?> editUserData(@RequestBody @Valid EditUserDataRequestDto dto, HttpServletRequest request) throws AuthenticationException {
-        if (!sessionManager.userHasPrivileges(request)) {
-            throw new IllegalArgumentException("No privileges!");
+    @PostMapping("/user/logout")
+    public ResponseEntity<String> logout(HttpSession session) {
+        try {
+            sessionManager.logoutUser(session);
+            return ResponseEntity.ok("Successfully logged out");
+        } catch (BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
         }
-        return userService.editUserData(dto);
     }
 
+    @PutMapping("/profile/edit")
+    public ResponseEntity<?> editProfile(@RequestParam Long id,
+                                         @RequestBody @Valid EditUserDataRequestDto dto, HttpServletRequest request) throws AuthenticationException, javax.naming.AuthenticationException {
+        try {
+            sessionManager.validateSession(request);
+            
+            userService.editUserData(id, dto);
+            return ResponseEntity.ok("Profile updated successfully.");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while updating the profile.");
+        }
+    }
 }
