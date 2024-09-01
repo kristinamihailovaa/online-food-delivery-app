@@ -6,6 +6,7 @@ import com.deliveryapp.exception.BadRequestException;
 import com.deliveryapp.model.dto.user.EditUserDataRequestDto;
 import com.deliveryapp.model.dto.user.LoginRequestUserDTO;
 import com.deliveryapp.model.dto.user.RegistrationRequestDto;
+import com.deliveryapp.model.dto.user.UserWithoutPasswordDto;
 import com.deliveryapp.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -71,10 +72,34 @@ public class UserController {
         }
     }
 
+    @GetMapping("/user/profile")
+    public ResponseEntity<?> getProfile(HttpSession session) {
+        Long loggedUserId = (Long) session.getAttribute("logged_user_id");
+
+        if (loggedUserId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("You need to be logged in to view the profile.");
+        }
+
+        try {
+            UserWithoutPasswordDto userprofileDto = userService.getProfile(loggedUserId);
+            return ResponseEntity.ok(userprofileDto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while retrieving the profile.");
+        }
+    }
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid RegistrationRequestDto dto, HttpSession session) throws IllegalAccessException, BadRequestException {
-//        sessionManager.isLoggedVerification(session);
-        return ResponseEntity.ok(userService.registerUser(dto));
+        try {
+            userService.registerUser(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User with this email already exists.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred during registration.");
+        }
     }
 
     @PostMapping("/user/logout")
@@ -91,9 +116,12 @@ public class UserController {
     @PutMapping("/profile/edit")
     public ResponseEntity<?> editProfile(@RequestParam Long id,
                                          @RequestBody @Valid EditUserDataRequestDto dto, HttpServletRequest request) throws AuthenticationException, javax.naming.AuthenticationException {
+        Long loggedUserId = (Long) request.getSession().getAttribute("logged_user_id");
         try {
-            sessionManager.validateSession(request);
-            
+            if (loggedUserId == null || !loggedUserId.equals(id)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body("You are not authorized to edit this profile.");
+            }
             userService.editUserData(id, dto);
             return ResponseEntity.ok("Profile updated successfully.");
         } catch (Exception ex) {

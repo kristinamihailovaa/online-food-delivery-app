@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -87,6 +89,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
         user.setAdmin(dto.isAdmin());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate birthDate = LocalDate.parse(dto.getBirthDate(), formatter);
+        user.setBirthDate(birthDate);
         userRepository.save(user);
 
         return new RegistrationResponseUserDto(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.isAdmin());
@@ -122,6 +127,22 @@ public class UserService {
         userRepository.save(user);
 
         passwordTokenRepository.delete(resetToken);
+    }
+
+    public UserWithoutPasswordDto getProfile(Long loggedUserId) {
+        User user = userRepository.findById(loggedUserId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        UserWithoutPasswordDto userDto = new UserWithoutPasswordDto();
+        userDto.setEmail(user.getEmail());
+        userDto.setFirstname(user.getFirstName());
+        userDto.setLastname(user.getLastName());
+        userDto.setMobilePhone(user.getPhoneNumber());
+        userDto.setAddresses(user.getAddresses());
+        userDto.setBirthDate(user.getBirthDate());
+
+        return userDto;
+
     }
 }
 

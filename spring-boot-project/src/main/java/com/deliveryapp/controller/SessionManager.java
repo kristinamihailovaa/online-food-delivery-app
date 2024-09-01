@@ -57,7 +57,7 @@ public class SessionManager {
         String remoteAddress = request.getRemoteAddr();
         HttpSession session = request.getSession();
         if (session.getAttribute(LOGGED_USER_ID) == null) {
-            throw new ArithmeticException("You have to be logged in!");
+            throw new AuthenticationException("You have to be logged in!");
         }
         if (!remoteAddress.equals(session.getAttribute(LOGGED_USER_REMOTE_ADDRESS))) {
             session.invalidate();
