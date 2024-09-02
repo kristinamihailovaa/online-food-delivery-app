@@ -25,6 +25,7 @@ public class Item {
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @Column(name = "DESCRIPTION")
