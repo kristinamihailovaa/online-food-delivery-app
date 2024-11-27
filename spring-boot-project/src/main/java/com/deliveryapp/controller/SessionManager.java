@@ -32,17 +32,9 @@ public class SessionManager {
         session.invalidate();
     }
 
-    public boolean userHasPrivileges(HttpServletRequest request, long id) throws AuthenticationException {
-        User user = getLoggedUser(request);
-        if (user.isAdmin()){
-            return true;
-        }
-        return id == user.getId();
-    }
-
     public boolean userHasPrivileges(HttpServletRequest request) throws AuthenticationException {
         User user = getLoggedUser(request);
-        return user.isAdmin();
+        return !user.isAdmin();
     }
 
     public User getLoggedUser(HttpServletRequest request) throws AuthenticationException {

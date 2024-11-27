@@ -1,5 +1,6 @@
 package com.deliveryapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,24 +25,24 @@ public class Item {
 
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 
     @Column(name = "DESCRIPTION")
     private String description;
+
     @Column(name = "PRICE")
     private double price;
 
     @Column(name = "QUANTITY")
     private int quantity;
 
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private ItemImage itemImage;
 
-    @OneToOne(mappedBy = "item")
-    @JsonBackReference
-    ItemImage itemImages;
-
-    @OneToMany(mappedBy = "item")
-    @JsonBackReference
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<OrderedItems> orderedItems;
 }
