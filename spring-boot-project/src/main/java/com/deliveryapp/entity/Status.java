@@ -1,6 +1,5 @@
 package com.deliveryapp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,20 +7,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "item_images")
-@Setter
-@Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class ItemImage {
-
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "statuses")
+public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String url;
-
-    @OneToOne
-    @JsonIgnore
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @Column
+    private Long id;
+    @Column
+    private String name;
 }

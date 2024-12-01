@@ -21,13 +21,20 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_id")
     private User buyer;
+
     private Timestamp createdAt;
+
     @OneToMany(mappedBy = "order")
     @JsonBackReference
     List<OrderedItems> orderedProducts;
-    private String status;
+
+    @ManyToOne
+    @JoinColumn(name= "status_id", nullable = false)
+    private Status status;
+
 }

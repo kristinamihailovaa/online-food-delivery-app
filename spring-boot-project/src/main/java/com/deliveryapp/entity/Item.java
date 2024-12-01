@@ -22,7 +22,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
-
+    @Column
     private String name;
 
     @ManyToOne
@@ -38,9 +38,9 @@ public class Item {
     @Column(name = "QUANTITY")
     private int quantity;
 
-    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private ItemImage itemImage;
+    @Column(name = "imageurl")
+    private int imageUrl;
+
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @JsonManagedReference
