@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const Header = () => {
+
+    let currentPath = window.location.pathname;
+    
     return <div>
         <header>
             <div className="header-area ">
@@ -11,17 +14,17 @@ const Header = () => {
                                 <div className="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><Link className="active" to="/">Начало</Link></li>
-                                            <li><Link to="/menu">Меню</Link></li>
-                                            <li><Link to="/about">За нас</Link></li>
-                                            <li><Link to="/contact">Контакти</Link></li>
+                                            <li><Link className={currentPath === '/' ? 'active' : ''} to="/">Начало</Link></li>
+                                            <li><Link to="/menu" className={currentPath.includes('/menu') ? 'active' : ''}>Меню</Link></li>
+                                            <li><Link to="/about" className={currentPath.includes('/about') ? 'active' : ''}>За нас</Link></li>
+                                            <li><Link to="/contact" className={currentPath.includes('/contact') ? 'active' : ''}>Контакти</Link></li>
                                         </ul>
                                     </nav>
                                 </div>
                             </div>
                             <div className="col-xl-2 col-lg-2">
                                 <div className="logo-img">
-                                    <Link to="index.html">
+                                    <Link to="/">
                                         <img src="img/logo.png" alt="" />
                                     </Link>
                                 </div>
@@ -31,22 +34,22 @@ const Header = () => {
                                     <div className="socail_links">
                                         <ul>
                                             <li>
-                                                <Link to="#">
+                                                <Link to="/">
                                                     <i className="fa fa-instagram"></i>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="#">
+                                                <Link to="/">
                                                     <i className="fa fa-twitter"></i>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="#">
+                                                <Link to="/">
                                                     <i className="fa fa-facebook"></i>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="#">
+                                                <Link to="/">
                                                     <i className="fa fa-google-plus"></i>
                                                 </Link>
                                             </li>
@@ -54,12 +57,12 @@ const Header = () => {
                                     </div>
                                     <div className="book_btn d-none d-xl-block">
                                         <Link to="/cart">
-                                        <i className="fa fa-shopping-cart"></i>
+                                            <i className="fa fa-shopping-cart"></i>
                                         </Link>
-                                        &nbsp; 
-                                        &nbsp; 
-                                        <Link to="/login"> 
-                                        Вход / Регистрация
+                                        &nbsp;
+                                        &nbsp;
+                                        <Link to="/login">
+                                            Вход / Регистрация
                                         </Link>
                                     </div>
                                 </div>

@@ -62,7 +62,6 @@ const Footer = () => {
             </div>
             <div className="copy-right_text">
                 <div className="container">
-                    
                     <div className="row">
                         <div className="col-xl-12">
                             <p className="copy_right text-center">

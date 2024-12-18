@@ -2340,7 +2340,7 @@ h3 {
 }
 
 .breadcam_bg_1 {
-  background-image: url(../img/banner/bradcam2.png);
+  background-image: url('../img/banner/burger_bg_3.png');
 }
 
 .breadcam_bg_2 {
@@ -2579,6 +2579,7 @@ h3 {
 }
 
 .gallery_area {
+  background-image: url('../img/banner/burger_bg_3.png');
   overflow: hidden;
   padding-top: 140px;
   padding-bottom: 10px;
@@ -2603,6 +2604,7 @@ h3 {
   overflow: hidden;
   border-right: 8px solid #fff;
   border-bottom: 8px solid #fff;
+  text-align: center;
 }
 
 @media (max-width: 767px) {
