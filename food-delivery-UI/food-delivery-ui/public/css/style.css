@@ -316,6 +316,7 @@ h3 {
   border-radius: 30px;
   padding: 9px 30px;
   cursor: pointer;
+  margin: 0 10px;
 }
 
 .boxed-btn3:hover {
@@ -4572,19 +4573,12 @@ h6 {
 }
 
 .blog_right_sidebar .widget_title {
-  font-size: 20px;
-  margin-bottom: 40px;
-}
-
-.blog_right_sidebar .widget_title::after {
-  content: "";
-  display: block;
-  padding-top: 15px;
-  border-bottom: 1px solid #f0e9ff;
+  font-size: 14px;
+  color: #F2C64D;
+  font-weight: bold;
 }
 
 .blog_right_sidebar .single_sidebar_widget {
-  background: #fbf9ff;
   padding: 30px;
   margin-bottom: 30px;
 }
@@ -4711,6 +4705,11 @@ h6 {
   margin-top: 20px;
 }
 
+.tag_cloud_widget {
+  position: absolute;
+  top: -35px;
+}
+
 .blog_right_sidebar .tag_cloud_widget ul li {
   display: inline-block;
 }
@@ -4725,15 +4724,17 @@ h6 {
   transition: all 0.3s ease 0s;
   color: #888888;
   font-size: 13px;
+  font-weight: bold;
 }
 
 .blog_right_sidebar .tag_cloud_widget ul li a:hover {
-  background: #FFD800;
+  background: #F2C64D;
   color: #fff !important;
   -webkit-text-fill-color: #fff;
   text-decoration: none;
   -webkit-transition: 0.5s;
   transition: 0.5s;
+  font-weight: bold;
 }
 
 .blog_right_sidebar .instagram_feeds .instagram_row {

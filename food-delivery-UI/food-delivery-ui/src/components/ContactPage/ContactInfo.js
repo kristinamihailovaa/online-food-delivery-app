@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const ContactInfo = () => {
     return <div>
-        <div className="bradcam_area breadcam_bg_1 overlay">
+        <div className="bradcam_area breadcam_bg_2">
             <h3>FOOD HEAVEN - BULGARIA 🍟</h3>
             <br/>
             <Link to="/menu" className="boxed-btn3">Виж менюто</Link>
@@ -11,7 +11,7 @@ const ContactInfo = () => {
             <div className="container">
                 <div className="d-none d-sm-block mb-5 pb-4">
                     <div id="map" style={{ height: '480px', position: 'relative', overflow: 'hidden' }}>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93836.37954521114!2d23.241374710168056!3d42.695528666413594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8682cb317bf5%3A0x400a01269bf5e60!2sSofia!5e0!3m2!1sen!2sbg!4v1734683997873!5m2!1sen!2sbg" width="600" height="450" style={{border:'0', width: '100%', height: '100%'}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d93836.37954521114!2d23.241374710168056!3d42.695528666413594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8682cb317bf5%3A0x400a01269bf5e60!2sSofia!5e0!3m2!1sen!2sbg!4v1734683997873!5m2!1sen!2sbg" width="600" height="450" style={{border:'0', width: '100%', height: '100%'}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <div className="row">
@@ -19,26 +19,26 @@ const ContactInfo = () => {
                         <h2 className="contact-title">Свържете се с нас!</h2>
                     </div>
                     <div className="col-lg-8">
-                        <form className="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                        <form className="form-contact contact_form" action="/" method="post" id="contactForm">
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <input className="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Име'" placeholder="Име" />
+                                        <input className="form-control valid" name="name" id="name" type="text" placeholder="Име" />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="form-group">
-                                        <input className="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Електронна поща'" placeholder="Електронна поща" />
+                                        <input className="form-control valid" name="email" id="email" type="email" placeholder="Електронна поща" />
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group">
-                                        <input className="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Тема'" placeholder="Тема" />
+                                        <input className="form-control" name="subject" id="subject" type="text" placeholder="Тема" />
                                     </div>
                                 </div>
                                 <div className="col-12">
                                     <div className="form-group">
-                                        <textarea className="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Съобщение / запитване...'" placeholder="Съобщение / запитване..."></textarea>
+                                        <textarea className="form-control w-100" name="message" id="message" cols="30" rows="9" placeholder="Съобщение / запитване..."></textarea>
                                     </div>
                                 </div>
                             </div>

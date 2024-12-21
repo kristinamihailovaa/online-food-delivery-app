@@ -3,6 +3,7 @@ import Home from './components/HomePage/Home';
 import About from './components/AboutPage/About';
 import Contact from './components/ContactPage/Contact';
 import ScrollToTop from './components/Common/ScrollToTop';
+import Menu from './components/MenuPage/Menu';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="/about" exact element={<About />} />
             <Route path="/contact" exact element={<Contact />} />
+            <Route path="/menu" exact element={<Menu />} />
           </Routes>
         </header>
       </ScrollToTop>

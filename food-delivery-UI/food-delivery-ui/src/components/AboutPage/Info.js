@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Info = () => {
     return <div>
-        <div className="bradcam_area breadcam_bg_1 overlay">
+         <div className="bradcam_area breadcam_bg_2">
             <h3>FOOD HEAVEN - BULGARIA 🍟</h3>
             <br/>
             <Link to="/menu" className="boxed-btn3">Виж менюто</Link>
