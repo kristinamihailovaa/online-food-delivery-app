@@ -39,7 +39,7 @@ const Gallery = () => {
                 <img src="img/gallery/4.png" alt="" />
             </div>
             <div className="single_gallery small_img">
-                <Link className="popup-image" to="menu">
+                <Link className="popup-image" to="/menu">
                     <span className="boxed-btn3" style={{ backgroundColor: 'black' }}>ПОРЪЧАЙ</span>
                 </Link>
                 <img src="img/gallery/5.png" alt="" />
