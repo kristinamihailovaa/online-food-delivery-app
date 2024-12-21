@@ -5,6 +5,7 @@ import Contact from './components/ContactPage/Contact';
 import ScrollToTop from './components/Common/ScrollToTop';
 import Menu from './components/MenuPage/Menu';
 import Login from './components/Auth/Login';
+import Register from './components/Auth/Register';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/contact" exact element={<Contact />} />
             <Route path="/menu" exact element={<Menu />} />
             <Route path="/login" exact element={<Login />} />
+            <Route path="/register" exact element={<Register />} />
           </Routes>
         </header>
       </ScrollToTop>
