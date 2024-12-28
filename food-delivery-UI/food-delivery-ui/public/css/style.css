@@ -3209,7 +3209,7 @@ h6 {
 }
 
 .progress-table-wrap {
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 .progress-table {
@@ -3266,6 +3266,8 @@ h6 {
 
 .progress-table .table-row .country img {
   margin-right: 15px;
+  max-width: 60px;
+  max-height: 40px;
 }
 
 .progress-table .table-row .percentage .progress {
@@ -4016,6 +4018,10 @@ h6 {
   margin-top: 10px;
 }
 
+.whole-wrap {
+  background-image: url('../img/banner/burger_bg_3.png');
+}
+
 .section-top-border {
   padding: 50px 0;
   border-top: 1px dotted #eee;
@@ -4027,6 +4033,23 @@ h6 {
 
 .mt-30 {
   margin-top: 30px;
+}
+
+.cart-title,
+.cart-subtitle {
+  color: #f9f9ff;
+}
+
+.cart-subtitle {
+  font-weight: bold;
+  margin: initial;
+}
+
+.order-actions {
+  margin-top: 30px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .switch-wrap {

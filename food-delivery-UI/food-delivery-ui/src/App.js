@@ -6,6 +6,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 import Menu from './components/menu/Menu';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Cart from './components/cart/Cart';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/menu" exact element={<Menu />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/register" exact element={<Register />} />
+            <Route path="/cart" exact element={<Cart />} />
           </Routes>
         </header>
       </ScrollToTop>
