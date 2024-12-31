@@ -10,6 +10,7 @@ import Cart from './components/cart/Cart';
 import OrderDetails from './components/order/OrderDetails';
 import MyOrders from './components/order/MyOrders';
 import OrderConfirmation from './components/order/OrderConfirmation';
+import Error404 from './components/common/404';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/order" exact element={<OrderDetails />} />
             <Route path="/myOrders" exact element={<MyOrders />} />
             <Route path="/orderConfirm" exact element={<OrderConfirmation />} />
+            <Route path="*" exact element={<Error404 />} />
           </Routes>
         </header>
       </ScrollToTop>
