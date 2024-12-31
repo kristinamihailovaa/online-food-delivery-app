@@ -16,7 +16,7 @@ const PersonalData = () => {
         </form>
 
         <div className="order-actions">
-            <Link to="/order" className="btn btn-success">Финализиране</Link>
+            <Link to="/orderConfirm" className="btn btn-success">Финализиране</Link>
         </div>
     </div>
 };

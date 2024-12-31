@@ -159,7 +159,7 @@ h3 {
 }
 
 .mb-65 {
-  margin-bottom: 67px;
+  margin-bottom: 65px !important;
 }
 
 .black-bg {
@@ -2363,6 +2363,12 @@ h3 {
   padding: 215px 0 100px 0;
 }
 
+.order-confirmation-paragraph {
+  color: #FFFFFF;
+  margin-top: 15px;
+  font-size: 18px;
+}
+
 @media (max-width: 767px) {
   .bradcam_area {
     padding: 170px 0;
@@ -3977,7 +3983,7 @@ h6 {
 }
 
 .mb-30 {
-  margin-bottom: 30px;
+  margin-bottom: 30px !important;
 }
 
 .mb-10 {
