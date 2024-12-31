@@ -8,6 +8,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Cart from './components/cart/Cart';
 import OrderDetails from './components/order/OrderDetails';
+import MyOrders from './components/order/MyOrders';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/register" exact element={<Register />} />
             <Route path="/cart" exact element={<Cart />} />
             <Route path="/order" exact element={<OrderDetails />} />
+            <Route path="/myOrders" exact element={<MyOrders />} />
           </Routes>
         </header>
       </ScrollToTop>
