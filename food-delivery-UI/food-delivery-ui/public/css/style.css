@@ -2982,7 +2982,7 @@ h6 {
   display: inline-block;
   outline: none;
   line-height: 40px;
-  padding: 0 30px;
+  padding: 0 15px;
   font-size: 0.8em;
   text-align: center;
   text-decoration: none;
@@ -3132,49 +3132,49 @@ h6 {
 
 .genric-btn.warning {
   color: #fff;
-  background: #f4e700;
+  background: #f4ae22;
   border: 1px solid transparent;
 }
 
 .genric-btn.warning:hover {
-  color: #f4e700;
-  border: 1px solid #f4e700;
+  color: #f4ae22;
+  border: 1px solid #f4ae22;
   background: #fff;
 }
 
 .genric-btn.warning-border {
-  color: #f4e700;
-  border: 1px solid #f4e700;
+  color: #f4ae22;
+  border: 1px solid #f4ae22;
   background: #fff;
 }
 
 .genric-btn.warning-border:hover {
   color: #fff;
-  background: #f4e700;
+  background: #f4ae22;
   border: 1px solid transparent;
 }
 
 .genric-btn.danger {
   color: #fff;
-  background: #f44a40;
+  background: #c7251c;
   border: 1px solid transparent;
 }
 
 .genric-btn.danger:hover {
-  color: #f44a40;
-  border: 1px solid #f44a40;
+  color: #c7251c;
+  border: 1px solid #c7251c;
   background: #fff;
 }
 
 .genric-btn.danger-border {
-  color: #f44a40;
-  border: 1px solid #f44a40;
+  color: #c7251c;
+  border: 1px solid #c7251c;
   background: #fff;
 }
 
 .genric-btn.danger-border:hover {
   color: #fff;
-  background: #f44a40;
+  background: #c7251c;
   border: 1px solid transparent;
 }
 
@@ -3852,13 +3852,18 @@ h6 {
 }
 
 .default-select .nice-select {
-  border: none;
+  border: 1px solid black;
   border-radius: 0px;
   height: 40px;
   background: #f9f9ff;
   padding-left: 20px;
   padding-right: 40px;
-  width: 40%;
+  width: 50%;
+}
+
+.default-select .nice-select.status-select {
+  font-size: 11px;
+  width: 100% !important;
 }
 
 .default-select .nice-select .list {

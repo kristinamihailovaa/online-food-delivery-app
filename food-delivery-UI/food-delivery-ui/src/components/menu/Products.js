@@ -1,6 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Products = () => {
+    const navigate = useNavigate();
+
+    const confirmDelete = () => {
+        window.confirm('Сигурни ли сте, че искате да изтриете посочения продукт?');
+        navigate('/menu');
+    };
+
     return <div>
         <div className="bradcam_area breadcam_bg overlay">
             <h3 style={{ fontWeight: 'bold' }}>МЕНЮ</h3>
@@ -69,26 +76,27 @@ const Products = () => {
                     <div className="col-xl-6 col-md-6 col-lg-6">
                         <div className="single_delicious d-flex align-items-center">
                             <div className="thumb">
-                                <Link to="/">
-                                    <img src="img/burger/1.png" alt="" />
-                                </Link>
+                                <img src="img/burger/1.png" alt="" />
                             </div>
                             <div className="info">
-                                <Link to="/"><h3>Телешки бургер</h3></Link>
-                                <Link to="/"><p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p></Link>
+                                <h3>Телешки бургер</h3>
+                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
                                 <span>
                                     14.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
                     </div>
                     <div className="col-md-6 col-lg-6">
                         <div className="single_delicious d-flex align-items-center">
                             <div className="thumb">
-                                <Link to="/">
-                                    <img src="img/burger/2.png" alt="" />
-                                </Link>
+                                <img src="img/burger/2.png" alt="" />
                             </div>
                             <div className="info">
                                 <h3>Чедър бургер</h3>
@@ -97,6 +105,11 @@ const Products = () => {
                                     10.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
 
@@ -113,6 +126,11 @@ const Products = () => {
                                     19.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
                     </div>
@@ -128,6 +146,11 @@ const Products = () => {
                                     11.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
                     </div>
@@ -143,6 +166,11 @@ const Products = () => {
                                     12.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
 
@@ -159,6 +187,11 @@ const Products = () => {
                                     13.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
                     </div>
@@ -174,6 +207,11 @@ const Products = () => {
                                     10.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
                     </div>
@@ -189,6 +227,11 @@ const Products = () => {
                                     9.99лв
                                     <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
                                 </span>
+                                <br />
+                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                &nbsp;
+                                &nbsp;
+                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
                             </div>
                         </div>
                     </div>
