@@ -1,15 +1,12 @@
-import Footer from "../Footer";
-import Header from "../Header";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
     return <div>
-        <Header />
-        <div class="bradcam_area breadcam_bg overlay">
+        <div className="bradcam_area breadcam_bg overlay">
             <h3 style={{ fontWeight: 'bold' }}>ПОРЪЧКА</h3>
         </div>
-        <div class="whole-wrap">
-            <div class="container box_1170">
+        <div className="whole-wrap">
+            <div className="container box_1170">
                 <div className="section-top-border">
                     <h2 className="mb-30 cart-title">Вашата количка 🛒</h2>
                     <div className="progress-table-wrap">
@@ -129,7 +126,6 @@ const Cart = () => {
                 </div>
             </div>
         </div>
-        <Footer />
     </div>
 };
 

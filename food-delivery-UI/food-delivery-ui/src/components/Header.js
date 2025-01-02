@@ -1,9 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
 
-    let currentPath = window.location.pathname;
-    
+    const navigate = useNavigate();
+    const currentPath = window.location.pathname;
+
+    const redirectToAdmin = () => {
+        if (currentPath.includes('admin')) {
+            navigate('/');
+        } else {
+            navigate('/admin');
+        }
+    };
+
     return <div>
         <header>
             <div className="header-area ">
@@ -32,39 +41,23 @@ const Header = () => {
                             </div>
                             <div className="col-xl-5 col-lg-5 d-none d-lg-block">
                                 <div className="book_room">
-                                    <div className="socail_links">
-                                        <ul>
-                                            <li>
-                                                <Link to="/">
-                                                    <i className="fa fa-instagram"></i>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/">
-                                                    <i className="fa fa-twitter"></i>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/">
-                                                    <i className="fa fa-facebook"></i>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/">
-                                                    <i className="fa fa-google-plus"></i>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div className="book_btn d-none d-xl-block">
-                                        <Link to="/cart">
-                                            <i className="fa fa-shopping-cart"></i>
-                                        </Link>
-                                        &nbsp;
-                                        &nbsp;
-                                        <Link to="/login">
-                                            Вход / Регистрация
-                                        </Link>
+                                    <div className="main-menu  d-none d-lg-block">
+                                        <nav>
+                                            <ul id="navigation">
+                                                <li><Link to="/cart" className={currentPath.includes('/cart') ? 'active' : ''}>Количка</Link></li>
+                                                <li><Link to="/login" className={currentPath.includes('/login') || currentPath.includes('register') ? 'active' : ''}>Вход / регистрация</Link></li>
+                                                <li>
+                                                    <div className="switch-wrap d-flex justify-content-between">
+                                                        <div className="confirm-switch">
+                                                            <input type="checkbox" id="confirm-switch" onChange={redirectToAdmin}
+                                                                checked={currentPath.includes('/admin') ? true : false} />
+                                                            <label for="confirm-switch"></label>
+                                                        </div>
+                                                        <p>Админ</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </nav>
                                     </div>
                                 </div>
                             </div>

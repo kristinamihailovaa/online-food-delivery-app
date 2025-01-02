@@ -794,17 +794,13 @@ h3 {
   background: transparent;
   padding: 12px 26px;
   font-size: 18px;
-  font-weight: 500;
-  border: 1px solid #F2C64D;
-  color: #F2C64D;
+  color: #FFFFFF;
   border-radius: 30px;
   font-family: "Paytone One", sans-serif;
 }
 
 .header-area .main-header-area .book_room .book_btn a:hover {
-  background: #F2C64D;
-  color: #fff;
-  border: 1px solid #F2C64D;
+  color: #F2C64D;
 }
 
 .header-area .main-header-area .main-menu ul li {
@@ -4013,6 +4009,11 @@ h6 {
 
 .switch-wrap {
   margin-bottom: 10px;
+}
+
+.switch-wrap p {
+  color: #FFFFFF;
+  font-weight: bold;
 }
 
 .latest-blog-area .area-heading {

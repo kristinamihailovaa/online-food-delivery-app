@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import Footer from "../Footer";
-import Header from "../Header";
 
 const Register = () => {
     return <div>
-        <Header />
         <section className="contact-section">
             <div className="container">
                 <div className="row">
@@ -47,7 +44,6 @@ const Register = () => {
                 </div>
             </div>
         </section>
-        <Footer />
     </div>
 };
 

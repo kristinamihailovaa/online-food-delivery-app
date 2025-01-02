@@ -1,17 +1,10 @@
-import { Link } from "react-router-dom";
-
-import Footer from "../Footer";
-import Header from "../Header";
-
 const MyOrders = () => {
     return <div>
-        <Header />
-
-        <div class="bradcam_area breadcam_bg overlay">
+        <div className="bradcam_area breadcam_bg overlay">
             <h3 style={{ fontWeight: 'bold' }}>ИСТОРИЯ НА ПОРЪЧКИТЕ</h3>
         </div>
-        <div class="whole-wrap">
-            <div class="container box_1170">
+        <div className="whole-wrap">
+            <div className="container box_1170">
                 <div className="section-top-border">
                     <h3 className="mb-30 mt-20 cart-title" style={{ fontWeight: 'bold' }}>Поръчка #12345</h3>
                     <h5 className="mb-10 cart-title">Дата: 23.08.2024 г.</h5>
@@ -76,8 +69,6 @@ const MyOrders = () => {
                 </div>
             </div>
         </div>
-
-        <Footer />
     </div>
 };
 

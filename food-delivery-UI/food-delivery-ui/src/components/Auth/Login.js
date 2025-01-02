@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import Footer from "../Footer";
-import Header from "../Header";
 
 const Login = () => {
     return <div>
-        <Header />
         <section className="contact-section">
             <div className="container">
                 <div className="row">
@@ -37,7 +34,6 @@ const Login = () => {
                 </div>
             </div>
         </section>
-        <Footer />
     </div>
 };
 

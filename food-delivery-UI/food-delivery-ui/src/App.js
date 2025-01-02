@@ -11,12 +11,16 @@ import OrderDetails from './components/order/OrderDetails';
 import MyOrders from './components/order/MyOrders';
 import OrderConfirmation from './components/order/OrderConfirmation';
 import Error404 from './components/common/404';
+import Admin from './components/admin/Admin';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="App">
       <ScrollToTop>
         <header className="App-header">
+          <Header />
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/about" exact element={<About />} />
@@ -28,8 +32,10 @@ function App() {
             <Route path="/order" exact element={<OrderDetails />} />
             <Route path="/myOrders" exact element={<MyOrders />} />
             <Route path="/orderConfirm" exact element={<OrderConfirmation />} />
+            <Route path="/admin" exact element={<Admin />} />
             <Route path="*" exact element={<Error404 />} />
           </Routes>
+          <Footer />
         </header>
       </ScrollToTop>
     </div>
