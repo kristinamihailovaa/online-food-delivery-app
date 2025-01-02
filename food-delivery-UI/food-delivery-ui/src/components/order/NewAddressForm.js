@@ -12,20 +12,20 @@ const NewAddressForm = ({ isVisible }) => {
                 <input type="text" name="address" placeholder="Номер *" required className="single-input pl-20" />
             </div>
             <div className="input-group-icon mt-10">
-                <input type="text" name="address" placeholder="Блок (незадължително)" required className="single-input pl-20" />
+                <input type="text" name="address" placeholder="Блок (незадължително)" className="single-input pl-20" />
             </div>
             <div className="input-group-icon mt-10">
-                <input type="text" name="address" placeholder="Вход (незадължително)" required className="single-input pl-20" />
+                <input type="text" name="address" placeholder="Вход (незадължително)" className="single-input pl-20" />
             </div>
             <div className="input-group-icon mt-10">
-                <input type="text" name="address" placeholder="Етаж (незадължително)" required className="single-input pl-20" />
+                <input type="text" name="address" placeholder="Етаж (незадължително)" className="single-input pl-20" />
             </div>
             <div className="input-group-icon mt-10">
-                <input type="text" name="address" placeholder="Апартамент (незадължително)" required className="single-input pl-20" />
+                <input type="text" name="address" placeholder="Апартамент (незадължително)" className="single-input pl-20" />
             </div>
 
             <div className="mt-10">
-                <textarea className="single-textarea" placeholder="Коментар към поръчката..." required rows="3"></textarea>
+                <textarea className="single-textarea" placeholder="Коментар към поръчката..." rows="3"></textarea>
             </div>
         </form>
     </div>

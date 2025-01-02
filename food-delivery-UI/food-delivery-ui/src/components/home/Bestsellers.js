@@ -19,7 +19,7 @@ const Bestsellers = () => {
                                 <span>11.99лв</span>
                                 <h3>Зингер Бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!<br /> от вкусове.</p>
-                                <Link to="/" className="boxed-btn3">Поръчай сега!</Link>
+                                <Link to="/menu" className="boxed-btn3">Поръчай сега!</Link>
                             </div>
 
                         </div>
@@ -33,7 +33,7 @@ const Bestsellers = () => {
                                 <span>19.99 лв</span>
                                 <h3>Блек ангъс</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!<br /> от вкусове.</p>
-                                <Link to="/" className="boxed-btn3">Поръчай сега!</Link>
+                                <Link to="/menu" className="boxed-btn3">Поръчай сега!</Link>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import Footer from "../Footer";
-import Header from "../Header";
 import SavedAddresses from "./SavedAddresses";
 import NewAddressForm from "./NewAddressForm";
 import PersonalData from './PersonalData';
@@ -14,7 +12,6 @@ const OrderDetails = () => {
     };
 
     return <div>
-        <Header />
         <div className="bradcam_area breadcam_bg overlay">
             <h3 style={{ fontWeight: 'bold' }}>АДРЕС И ЛИЧНИ ДАННИ</h3>
         </div>
@@ -30,7 +27,6 @@ const OrderDetails = () => {
             </div>
 
         </div>
-        <Footer />
     </div >
 };
 

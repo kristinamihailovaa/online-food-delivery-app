@@ -23,7 +23,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <Link to="/"><h3>Телешки бургер</h3></Link>
                                 <Link to="/"><p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p></Link>
-                                <span>14.99лв</span>
+                                <span>
+                                    14.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -37,7 +40,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Чедър бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>10.99лв</span>
+                                <span>
+                                    10.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
 
@@ -50,7 +56,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Блек ангъс бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>19.99лв</span>
+                                <span>
+                                    19.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -62,7 +71,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Зингер бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>11.99лв</span>
+                                <span>
+                                    11.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -74,7 +86,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Туна бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>12.99лв</span>
+                                <span>
+                                    12.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
 
@@ -87,7 +102,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Рокер бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>13.99лв</span>
+                                <span>
+                                    13.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -99,7 +117,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Пушен бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>10.99лв</span>
+                                <span>
+                                    10.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -111,7 +132,10 @@ const ShortMenu = () => {
                             <div className="info">
                                 <h3>Мортадела бургер</h3>
                                 <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>9.99лв</span>
+                                <span>
+                                    9.99лв
+                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
+                                </span>
                             </div>
                         </div>
                     </div>
