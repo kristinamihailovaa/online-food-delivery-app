@@ -1,0 +1,20 @@
+2025-03-02T23:04:17.279Z  INFO 12192 --- [main] c.d.SpringBootProjectApplicationTests    : Starting SpringBootProjectApplicationTests using Java 17.0.9 with PID 12192 (started by Kristina Mihaylova in C:\Users\Kristina Mihaylova\WorkSpace\online-food-delivery-app\spring-boot-project)
+2025-03-02T23:04:17.285Z  INFO 12192 --- [main] c.d.SpringBootProjectApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2025-03-02T23:04:19.174Z  INFO 12192 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-02T23:04:19.252Z  INFO 12192 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 69 ms. Found 5 JPA repository interfaces.
+2025-03-02T23:04:19.976Z  INFO 12192 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-02T23:04:20.175Z  INFO 12192 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2025-03-02T23:04:20.177Z  INFO 12192 --- [main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2025-03-02T23:04:20.494Z  INFO 12192 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-03-02T23:04:20.787Z  INFO 12192 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-02T23:04:20.806Z  INFO 12192 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-02T23:04:23.928Z  INFO 12192 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b94703b
+2025-03-02T23:04:23.942Z  INFO 12192 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-02T23:04:25.246Z  INFO 12192 --- [main] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2025-03-02T23:04:26.296Z  INFO 12192 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2025-03-02T23:04:29.448Z  INFO 12192 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-02T23:04:30.778Z  WARN 12192 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-02T23:04:31.299Z  INFO 12192 --- [main] c.d.SpringBootProjectApplicationTests    : Started SpringBootProjectApplicationTests in 14.634 seconds (process running for 17.002)
+2025-03-02T23:04:33.541Z  INFO 12192 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-03-02T23:04:33.543Z  INFO 12192 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-03-02T23:04:33.621Z  INFO 12192 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
