@@ -44,5 +44,5 @@ public class Item {
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<OrderedItems> orderedItems;
+    private List<OrderedItem> orderedItems;
 }

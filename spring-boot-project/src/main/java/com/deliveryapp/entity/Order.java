@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -31,10 +32,13 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     @JsonBackReference
-    List<OrderedItems> orderedProducts;
+    List<OrderedItem> orderedProducts;
 
     @ManyToOne
     @JoinColumn(name= "status_id", nullable = false)
     private Status status;
+
+    @Column(nullable = false)
+    private BigDecimal totalAmount;
 
 }
