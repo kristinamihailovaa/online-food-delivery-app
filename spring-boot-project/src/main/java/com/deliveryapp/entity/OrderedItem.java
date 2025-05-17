@@ -4,24 +4,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.io.Serializable;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders_have_items")
-public class OrderedItems {
-    @Embeddable
-    @Data
-    public static class OrderedItemsKey implements Serializable {
-        long orderId;
-        long itemId;
-    }
-
-    @EmbeddedId
-    private OrderedItemsKey primaryKey;
+public class OrderedItem {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @MapsId("orderId")
@@ -35,6 +27,6 @@ public class OrderedItems {
     @JoinColumn(name = "item_id")
     Item item;
 
-    private int quantity;
+    private Integer quantity;
 
 }

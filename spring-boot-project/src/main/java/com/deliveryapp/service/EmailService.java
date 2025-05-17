@@ -7,19 +7,17 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
-
 @Service
 public class EmailService {
     @Autowired
-    private JavaMailSender mailSender;
+    private JavaMailSender javaMailSender;
 
     public void sendPasswordResetEmail(String to, String token) throws MessagingException {
         String subject = "Password Reset Request";
         String url = "http://localhost:8080/reset-password?token=" + token;
         String message = "To reset your password, click the link below:\n" + url;
 
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
@@ -27,6 +25,6 @@ public class EmailService {
         helper.setSubject(subject);
         helper.setText(message, true);
 
-        mailSender.send(mimeMessage);
+        javaMailSender.send(mimeMessage);
     }
 }
