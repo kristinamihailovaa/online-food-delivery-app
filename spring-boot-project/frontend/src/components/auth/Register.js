@@ -11,12 +11,22 @@ const Register = () => {
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <input className="form-control valid" name="email" id="email" type="email" placeholder="Имейл" />
+                                        <input className="form-control valid" name="firstName" id="firstname" type="firstname" placeholder="Име" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <input className="form-control valid" name="email" id="email" type="username" placeholder="Потребителско име" />
+                                        <input className="form-control valid" name="lastName" id="lastname" type="lastname" placeholder="Фамилия" />
+                                    </div>
+                                </div>
+                                <div className="col-lg-12">
+                                    <div className="form-group">
+                                        <input className="form-control valid" name="phoneNumber" id="PhoneNumber" type="PhoneNumber" placeholder="Мобилен телефон" />
+                                    </div>
+                                </div>
+                                <div className="col-lg-12">
+                                    <div className="form-group">
+                                        <input className="form-control valid" name="email" id="email" type="email" placeholder="Имейл" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
