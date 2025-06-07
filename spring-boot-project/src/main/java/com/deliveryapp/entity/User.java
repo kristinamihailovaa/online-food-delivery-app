@@ -36,9 +36,6 @@ public class User {
     @JsonBackReference
     private List<Order> orders;
 
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
-
 
     @ManyToMany
     @JsonManagedReference
