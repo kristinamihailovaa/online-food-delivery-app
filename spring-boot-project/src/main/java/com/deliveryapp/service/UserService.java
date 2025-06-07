@@ -10,12 +10,9 @@ import com.deliveryapp.repository.UserRepository;
 import com.deliveryapp.utils.UserUtils;
 import jakarta.mail.MessagingException;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -88,10 +85,8 @@ public class UserService {
         user.setUsername(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
+        user.setPhoneNumber(dto.getPhoneNumber());
         user.setAdmin(dto.isAdmin());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate birthDate = LocalDate.parse(dto.getBirthDate(), formatter);
-        user.setBirthDate(birthDate);
         userRepository.save(user);
 
         return new RegistrationResponseUserDto(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.isAdmin());
@@ -101,7 +96,7 @@ public class UserService {
     public void editUserData(Long userId, EditUserDataRequestDto dto) {
         Optional<User> optionalUser = userRepository.findById(userId);
 
-        if (!optionalUser.isPresent()) {
+        if (optionalUser.isEmpty()) {
             throw new EntityNotFoundException("User not found");
         }
 
@@ -110,7 +105,6 @@ public class UserService {
         user.setLastName(dto.getLastName());
         user.setEmail(dto.getEmail());
         user.setPhoneNumber(dto.getPhoneNumber());
-        user.setBirthDate(dto.getBirthDate());
 
 
         userRepository.save(user);
@@ -139,7 +133,6 @@ public class UserService {
         userDto.setLastname(user.getLastName());
         userDto.setMobilePhone(user.getPhoneNumber());
         userDto.setAddresses(user.getAddresses());
-        userDto.setBirthDate(user.getBirthDate());
 
         return userDto;
 

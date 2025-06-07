@@ -18,6 +18,7 @@ public class RegistrationRequestDto {
     private String password;
     @NotBlank(message = "Password confirmation is mandatory!")
     private String confirmPassword;
+    @NotBlank(message = "Phone number is mandatory!")
+    private String phoneNumber;
     private boolean isAdmin;
-    private String birthDate;
 }
