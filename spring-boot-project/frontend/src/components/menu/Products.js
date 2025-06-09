@@ -1,11 +1,58 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
+import { deleteItem, getItemsByCategory } from "../../services/itemService";
+import { getcategories } from '../../services/categoryService';
 
 const Products = () => {
-    const navigate = useNavigate();
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
 
-    const confirmDelete = () => {
-        window.confirm('Сигурни ли сте, че искате да изтриете посочения продукт?');
-        navigate('/menu');
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    useEffect(() => {
+        getcategories()
+        .then((result) => {            
+            setCategories(result.data);
+            setSelectedCategory(result.data[0].id)
+        });     
+    }, []);
+
+    useEffect(() => {
+        getItemsByCategory(selectedCategory)
+        .then((result) => {            
+            setProducts(result.data);
+        });
+    }, [selectedCategory]);
+
+    const confirmDelete = (itemId) => {
+        const deleteConfirmed = window.confirm('Сигурни ли сте, че искате да изтриете посочения продукт?');
+        if(!deleteConfirmed){
+            return;
+        }
+        deleteItem(itemId);
+        const newProducts = products.filter(p =>
+                  p.id !== itemId
+                )
+        setProducts(newProducts)
+    };
+
+    const addToCart = (product) => { 
+        console.log("adding", product);
+        
+        const cart = JSON.parse(localStorage.getItem('products'))??[];
+
+        const item = cart?.find((item)=>item.id === product.id);
+
+        if(item){
+            item.quantity++;
+        }
+        else{
+            product.quantity=1;
+            cart.push(product);
+        }
+
+        localStorage.setItem('products', JSON.stringify(cart));
     };
 
     return <div>
@@ -45,200 +92,45 @@ const Products = () => {
                             <aside className="single_sidebar_widget tag_cloud_widget">
                                 <h4 className="widget_title">Избери категория</h4>
                                 <ul className="list">
-                                    <li>
-                                        <Link to="#">Бургери</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Пици</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Месо</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Тортили</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Картофки</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Напитки</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Десерти</Link>
-                                    </li>
+                                    {categories.map((category)=>(
+                                        <li>
+                                            <Link to="#" onClick={()=>setSelectedCategory(category.id)}>{category.name} </Link>
+                                        </li>
+                                    ))}
                                 </ul>
                             </aside>
                         </div>
                     </div>
-
                 </div>
                 <div className="row">
-                    <div className="col-xl-6 col-md-6 col-lg-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/1.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Телешки бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    14.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-6 col-lg-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/2.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Чедър бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    10.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
+                    {products.map((product)=>(
+                        <div className="col-xl-6 col-md-6 col-lg-6">
+                            <div className="single_delicious d-flex align-items-center">
+                                <div className="thumb">
+                                    <img style={{objectFit: 'cover'}} width="166" height="166"ize src={product.imageUrl} alt="" />
+                                </div>
+                                <div className="info">
+                                    <h3>{product.name}</h3>
+                                    <p>{product.description}</p>
+                                    <span>
+                                        {product.price}лв
+                                        <button to="" className="boxed-btn3" style={{ fontSize: '14px' }} onClick={() => addToCart(product)}>Поръчай</button>
+                                    </span>
+                                    {!(user && user.isAdmin) ?? <div>
+                                        <br />
+                                        <Link to={`/admin/${product.id}`} className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
+                                        &nbsp;
+                                        &nbsp;
+                                        <button className="genric-btn danger radius" onClick={()=>confirmDelete(product.id)}><i className="ti-trash">&nbsp; Изтрий</i></button>
+                                    </div>}
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/3.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Блек ангъс бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    19.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-xl-6 col-md-6 col-lg-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/4.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Зингер бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    11.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/5.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Туна бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    12.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/6.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Рокер бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    13.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/7.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Пушен бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    10.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                        <div className="single_delicious d-flex align-items-center">
-                            <div className="thumb">
-                                <img src="img/burger/8.png" alt="" />
-                            </div>
-                            <div className="info">
-                                <h3>Мортадела бургер</h3>
-                                <p>Сочен бургер, приготвен с любов и перфектния баланс от вкусове!</p>
-                                <span>
-                                    9.99лв
-                                    <Link to="/menu" className="boxed-btn3" style={{ fontSize: '14px' }}>Поръчай</Link>
-                                </span>
-                                <br />
-                                <Link to="/admin" className="genric-btn warning radius"><i className="ti-pencil">&nbsp;Редактирай</i></Link>
-                                &nbsp;
-                                &nbsp;
-                                <button className="genric-btn danger radius" onClick={confirmDelete}><i className="ti-trash">&nbsp; Изтрий</i></button>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 
-            <nav className="blog-pagination justify-content-center d-flex">
+            {/* <nav className="blog-pagination justify-content-center d-flex">
                 <ul className="pagination">
                     <li className="page-item">
                         <Link to="/menu" className="boxed-btn3" aria-label="Previous">
@@ -263,7 +155,7 @@ const Products = () => {
                         </Link>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
         </div>
     </div>
 };

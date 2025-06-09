@@ -1,12 +1,21 @@
 import { Link } from "react-router-dom";
+import { getUserProfile, login } from "../../services/userService.js";
 
 const Login = () => {
+    function submit(formData) {
+        const password = formData.get("password")
+        const email = formData.get("email")
+        login({password, email});
+        var user = getUserProfile();
+        localStorage.setItem('user', JSON.stringify(user.data));
+    }
+
     return <div>
         <section className="contact-section">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <form className="form-contact contact_form" action="/" method="post" id="contactForm">
+                        <form className="form-contact contact_form" action={submit} method="post" id="contactForm">
                             <h2 className="contact-title">Влез в профила си</h2>
                             <div className="row">
                                 <div className="col-lg-12">
@@ -16,7 +25,7 @@ const Login = () => {
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <input className="form-control" name="subject" id="password" type="password" placeholder="Парола" />
+                                        <input className="form-control" name="password" id="password" type="password" placeholder="Парола" />
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +37,7 @@ const Login = () => {
                     </div>
                     <div className="col-lg-3">
                         <div className="form-group">
-                            <img src='img/FH_transparent_login.png' />
+                            <img src='img/FH_transparent_login.png' alt="Login decoration"/>
                         </div>
                     </div>
                 </div>

@@ -32,6 +32,7 @@ function App() {
             <Route path="/order" exact element={<OrderDetails />} />
             <Route path="/myOrders" exact element={<MyOrders />} />
             <Route path="/orderConfirm" exact element={<OrderConfirmation />} />
+            <Route path="/admin/:itemId" exact element={<Admin />} />
             <Route path="/admin" exact element={<Admin />} />
             <Route path="*" exact element={<Error404 />} />
           </Routes>

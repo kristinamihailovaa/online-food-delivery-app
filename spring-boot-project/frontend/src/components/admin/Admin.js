@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom";
 import NewProductForm from "./NewProductForm";
 import OrdersTable from "./OrdersTable";
 
 const Admin = () => {
+    let { itemId } = useParams();
+
     return <div>
         <div className="bradcam_area breadcam_bg overlay">
             <h3 style={{ fontWeight: 'bold' }}>АДМИН ПАНЕЛ</h3>
@@ -10,8 +13,9 @@ const Admin = () => {
         <div className="whole-wrap">
             <div className="container box_1170">
                 <div className="section-top-border">
-                    <h2 className="mb-30 cart-title" style={{fontWeight: 'bold'}}>Добавяне на ново ястие към менюто</h2>
-                    <NewProductForm />
+                    {itemId ? <h2 className="mb-30 cart-title" style={{fontWeight: 'bold'}}>Редактиране на ястие</h2> :
+                    <h2 className="mb-30 cart-title" style={{fontWeight: 'bold'}}>Добавяне на ново ястие към менюто</h2>}
+                    <NewProductForm itemId={itemId}/>
                     <br/>
                     <h2 className="mb-30 cart-title" style={{fontWeight: 'bold'}}>Обновяване на поръчка</h2>
                     <div className="col-lg-4">
