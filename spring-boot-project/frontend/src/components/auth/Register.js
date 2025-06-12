@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
 const Register = () => {
+    function submit(formData) {
+        const query = formData.get("query");
+        alert(`You searched for '${query}'`);
+    }
+
     return <div>
         <section className="contact-section">
             <div className="container">
@@ -21,7 +26,7 @@ const Register = () => {
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <input className="form-control valid" name="phoneNumber" id="PhoneNumber" type="PhoneNumber" placeholder="Мобилен телефон" />
+                                        <input className="form-control valid" name="phoneNumber" id="PhoneNumber" type="tel" placeholder="Мобилен телефон" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
@@ -31,12 +36,12 @@ const Register = () => {
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <input className="form-control" name="subject" id="password" type="password" placeholder="Парола" />
+                                        <input className="form-control" name="password" id="password" type="password" placeholder="Парола" />
                                     </div>
                                 </div>
                                 <div className="col-lg-12">
                                     <div className="form-group">
-                                        <input className="form-control" name="subject" id="password" type="password" placeholder="Повтори паролата" />
+                                        <input className="form-control" name="confirmPassword" id="confirmPassword" type="password" placeholder="Повтори паролата" />
                                     </div>
                                 </div>
                             </div>

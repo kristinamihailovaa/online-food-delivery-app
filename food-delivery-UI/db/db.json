@@ -1,0 +1,9 @@
+{
+    "items": [
+        { "id": "1", "name": "a title", "description": "some big description", "imageUrl": "img/burger/1.png", "price": 12.99 },
+        { "id": "2", "name": "another title", "description": "some big description", "imageUrl": "img/burger/2.png", "price": 10.99 },
+        { "id": "3", "name": "another title 3", "description": "some big description 3", "imageUrl": "img/burger/3.png", "price": 10.99 }    ],
+    "categories": [
+        { "id": "3", "name": "Burgir"}
+    ]
+}

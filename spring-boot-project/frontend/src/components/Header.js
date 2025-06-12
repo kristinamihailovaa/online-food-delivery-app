@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../services/userService";
 
 const Header = () => {
-
     const navigate = useNavigate();
     const currentPath = window.location.pathname;
+
+    const user = JSON.parse(localStorage.getItem('user'));
 
     const redirectToAdmin = () => {
         if (currentPath.includes('admin')) {
@@ -12,6 +14,11 @@ const Header = () => {
             navigate('/admin');
         }
     };
+
+    const logoutuser = () => {
+        logout();
+        localStorage.removeItem("user");
+    }
 
     return <div>
         <header>
@@ -27,7 +34,7 @@ const Header = () => {
                                             <li><Link to="/menu" className={currentPath.includes('/menu') ? 'active' : ''}>Меню</Link></li>
                                             <li><Link to="/about" className={currentPath.includes('/about') ? 'active' : ''}>За нас</Link></li>
                                             <li><Link to="/contact" className={currentPath.includes('/contact') ? 'active' : ''}>Контакти</Link></li>
-                                            <li><Link to="/myOrders" className={currentPath.includes('/myOrders') ? 'active' : ''}>Моите поръчки</Link></li>
+                                            {/* <li><Link to="/myOrders" className={currentPath.includes('/myOrders') ? 'active' : ''}>Моите поръчки</Link></li> */}
                                         </ul>
                                     </nav>
                                 </div>
@@ -45,8 +52,9 @@ const Header = () => {
                                         <nav>
                                             <ul id="navigation">
                                                 <li><Link to="/cart" className={currentPath.includes('/cart') ? 'active' : ''}>Количка</Link></li>
-                                                <li><Link to="/login" className={currentPath.includes('/login') || currentPath.includes('register') ? 'active' : ''}>Вход / регистрация</Link></li>
-                                                <li>
+                                                {!user ?? <li><Link to="/" onClick={logoutuser}>Излизане</Link></li>}
+                                                {user ?? <li><Link to="/login" className={currentPath.includes('/login') || currentPath.includes('register') ? 'active' : ''}>Вход / регистрация</Link></li>}
+                                                {!(user && user.isAdmin) ?? <li>
                                                     <div className="switch-wrap d-flex justify-content-between">
                                                         <div className="confirm-switch">
                                                             <input type="checkbox" id="confirm-switch" onChange={redirectToAdmin}
@@ -55,7 +63,7 @@ const Header = () => {
                                                         </div>
                                                         <p>Админ</p>
                                                     </div>
-                                                </li>
+                                                </li>}
                                             </ul>
                                         </nav>
                                     </div>
