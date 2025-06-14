@@ -15,13 +15,13 @@ const Products = () => {
         .then((result) => {            
             setCategories(result.data);
             setSelectedCategory(result.data[0].id)
-        });     
+        });
     }, []);
 
     useEffect(() => {
         getItemsByCategory(selectedCategory)
         .then((result) => {            
-            setProducts(result.data);
+            setProducts(result.data.products);
         });
     }, [selectedCategory]);
 

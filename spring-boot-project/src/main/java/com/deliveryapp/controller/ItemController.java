@@ -16,8 +16,7 @@ import javax.naming.AuthenticationException;
 
 import java.util.List;
 
-import static com.deliveryapp.utils.Const.ROOT_ELEMENT_ITEM;
-import static com.deliveryapp.utils.Const.ROOT_ELEMENT_ITEMS;
+import static com.deliveryapp.utils.Const.*;
 
 @RestController
 public class ItemController {
@@ -68,6 +67,7 @@ public class ItemController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while deleting the item.");
         }
     }
+
     @GetMapping("/items/{id}")
     public ResponseEntity<?> getItemById(@PathVariable Long id) {
         try {
@@ -77,14 +77,16 @@ public class ItemController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Item not found.");
         }
     }
+
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<?> getItemsByCategory(@PathVariable Long categoryId) throws JsonProcessingException {
         List<ResponseItemDto> items = itemService.getItemsByCategory(categoryId);
         return ResponseEntity.status(HttpStatus.OK)
-                .body(mapper.writer().withRootName(ROOT_ELEMENT_ITEMS).writeValueAsString(items));
+                .body(mapper.writer().withRootName(ROOT_ELEMENT_PRODUCTS).writeValueAsString(items));
     }
-//    @GetMapping("/items/search/{keywordSequence}")
-//    public ResponseEntity<Page<ResponseItemDto>> searchItemsByKeyword(@PathVariable String keywordSequence , Pageable pageable){
-//        return ResponseEntity.ok(itemService.searchItemsByKeyword(pageable , keywordSequence));
-//    }
+
+    @GetMapping("/search")
+    public List<ResponseItemDto> searchItems(@RequestParam String query) {
+        return itemService.searchItems(query);
+    }
 }
