@@ -79,10 +79,14 @@ public class ItemController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<?> getItemsByCategory(@PathVariable Long categoryId) throws JsonProcessingException {
+    public ResponseEntity<?> getItemsByCategory(@PathVariable Long categoryId) {
         List<ResponseItemDto> items = itemService.getItemsByCategory(categoryId);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(mapper.writer().withRootName(ROOT_ELEMENT_PRODUCTS).writeValueAsString(items));
+        if (items.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Items npt found.");
+        }
+
+        return ResponseEntity.ok(items);
     }
 
     @GetMapping("/search")

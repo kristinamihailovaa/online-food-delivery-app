@@ -21,7 +21,7 @@ const Products = () => {
     useEffect(() => {
         getItemsByCategory(selectedCategory)
         .then((result) => {            
-            setProducts(result.data.products);
+            setProducts(result.data);
         });
     }, [selectedCategory]);
 
