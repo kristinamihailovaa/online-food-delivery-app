@@ -63,7 +63,27 @@ public class ItemService {
     }
 
     public List<ResponseItemDto> getItemsByCategory(Long categoryId) {
-        return itemRepository.findByCategoryId(categoryId).stream().map(item -> modelMapper.map(item, ResponseItemDto.class)).collect(Collectors.toList());
+        List<Item> items = itemRepository.findByCategoryId(categoryId);
+       return items.stream().map(item -> new ResponseItemDto(item.getId(), item.getName(), item.getCategory(), item.getPrice(), item.getDescription()))
+                .collect(Collectors.toList());
 
+
+    }
+
+    public List<ResponseItemDto> searchItems(String query) {
+        List<Item> items = itemRepository.findByNameContainingIgnoreCase(query);
+        return items.stream()
+                .map(this::mapToResponse)
+                .toList();
+    }
+
+    private ResponseItemDto mapToResponse(Item item) {
+        return new ResponseItemDto(
+                item.getId(),
+                item.getName(),
+                item.getCategory(),
+                item.getPrice(),
+                item.getDescription()
+        );
     }
 }

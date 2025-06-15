@@ -15,7 +15,7 @@ const Products = () => {
         .then((result) => {            
             setCategories(result.data);
             setSelectedCategory(result.data[0].id)
-        });     
+        });
     }, []);
 
     useEffect(() => {

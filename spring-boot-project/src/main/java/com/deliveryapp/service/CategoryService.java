@@ -18,16 +18,13 @@ public class CategoryService {
         this.categoryRepository = categoryRepository;
     }
 
-    // Създаване на нова категория
     @Transactional
     public Category createCategory(CategoryDto categoryDTO) {
         Category category = new Category();
         category.setCategoryName(categoryDTO.getName());
-        // Ако имаш нужда от други полета, ги попълни тук
         return categoryRepository.save(category);
     }
 
-    // Вземане на всички категории
     public List<CategoryDto> getAllCategories() {
         return categoryRepository.findAll().stream()
                 .map(this::convertToDTO)

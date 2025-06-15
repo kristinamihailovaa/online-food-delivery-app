@@ -35,11 +35,8 @@ public class Item {
     @Column(name = "PRICE")
     private double price;
 
-    @Column(name = "QUANTITY")
-    private int quantity;
-
     @Column(name = "imageurl")
-    private int imageUrl;
+    private String imageUrl;
 
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)

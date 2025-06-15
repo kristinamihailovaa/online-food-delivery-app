@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 public class CategoryController {
     @Autowired
     private SessionManager sessionManager;
@@ -28,21 +29,21 @@ public class CategoryController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/categories")
     public ResponseEntity<?> getAllCategories() {
         List<CategoryDto> categories = categoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
-        try {
-            CategoryDto category = categoryService.getCategoryById(id);
-            return ResponseEntity.ok(category);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found.");
-        }
-    }
+//    @GetMapping("/category/{id}")
+//    public ResponseEntity<?> getCategoryById(@PathVariable Long id) {
+//        try {
+//            CategoryDto category = categoryService.getCategoryById(id);
+//            return ResponseEntity.ok(category);
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found.");
+//        }
+//    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCategory(@PathVariable Long id, @RequestBody CategoryDto categoryDTO) {
