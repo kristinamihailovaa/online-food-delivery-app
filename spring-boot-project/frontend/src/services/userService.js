@@ -14,6 +14,6 @@ export const getUserProfile = () => {
   return axios.post("/user/profile");
 }
 
-export const register = () => {
-  return axios.post("register");
+export const register = (user) => {
+  return axios.post("register", user);
 }
