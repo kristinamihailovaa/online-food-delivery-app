@@ -10,8 +10,28 @@ const Cart = () => {
         setCartItems(cartItems);
     }, []);
     
-    const GetSum = () => cartItems?.reduce((sum, product) =>
-            sum + (product.quantity??1)*product.price, 0)
+    const getSum = () => cartItems?.reduce((sum, product) =>
+        sum + (product.quantity??1)*product.price, 0)
+
+    const addOne = (product) => {
+        const items = [...cartItems];
+        const increasedProduct = items.find(p=>p.id === product.id);
+        increasedProduct.quantity++;
+        setCartItems(items);
+        localStorage.setItem('products', JSON.stringify(cartItems));
+    }
+
+    const removeOne = (product) => {
+        let items = [...cartItems];
+        const decreasedProduct = items.find(p=>p.id === product.id);
+        decreasedProduct.quantity--;
+        if(decreasedProduct.quantity <= 0){
+            items = items.filter(p=>p.id !== product.id);
+        }
+
+        setCartItems(items);
+        localStorage.setItem('products', JSON.stringify(items));
+    }
 
     return <div>
         <div className="bradcam_area breadcam_bg overlay">
@@ -39,20 +59,20 @@ const Cart = () => {
                                     <div className="visit">{product.price}</div>
                                     <div className="visit">{product.price*(product.quantity??1)}</div>
                                     <div className="percentage">
-                                        <button className="btn btn-info">Добави още 1</button>
+                                        <button className="btn btn-info" onClick={()=>addOne(product)}>Добави още 1</button>
                                         &nbsp;
-                                        <button className="btn btn-danger">Премахни</button>
+                                        <button className="btn btn-danger" onClick={()=>removeOne(product)}>Премахни 1</button>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </div>
-                    <div className="order-actions">
-                        <h3 className="mb-30 cart-subtitle">Тотал: {GetSum()?.toFixed(2)}лв</h3>
+                    {!!cartItems.length && (<div className="order-actions">
+                        <h3 className="mb-30 cart-subtitle">Тотал: {getSum()?.toFixed(2)}лв</h3>
                         &nbsp;
                         &nbsp;
                         <Link to="/order" className="btn btn-success">Направи поръчка</Link>
-                    </div>
+                    </div>)}
                 </div>
             </div>
         </div>

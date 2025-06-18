@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
+import { register } from "../../services/userService";
 
 const Register = () => {
     function submit(formData) {
-        const query = formData.get("query");
-        alert(`You searched for '${query}'`);
+        const firstName = formData.get("firstName");
+        const lastName = formData.get("lastName");
+        const phoneNumber = formData.get("phoneNumber");
+        const email = formData.get("email");
+        const password = formData.get("password");
+        const confirmPassword = formData.get("confirmPassword");
+        register({firstName, lastName, phoneNumber, confirmPassword, password, email, });
     }
 
     return <div>
@@ -11,7 +17,7 @@ const Register = () => {
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <form className="form-contact contact_form" action="/" method="post" id="contactForm">
+                        <form className="form-contact contact_form" action={submit} method="post" id="contactForm">
                             <h2 className="contact-title">Регистрирай се!</h2>
                             <div className="row">
                                 <div className="col-lg-12">
@@ -53,7 +59,7 @@ const Register = () => {
                     </div>
                     <div className="col-lg-3">
                         <div className="form-group">
-                            <img src='img/FH_transparent_register.png' />
+                            <img src='img/FH_transparent_register.png' alt=''/>
                         </div>
                     </div>
                 </div>

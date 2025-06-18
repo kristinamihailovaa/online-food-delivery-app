@@ -38,8 +38,6 @@ const Products = () => {
     };
 
     const addToCart = (product) => { 
-        console.log("adding", product);
-        
         const cart = JSON.parse(localStorage.getItem('products'))??[];
 
         const item = cart?.find((item)=>item.id === product.id);
