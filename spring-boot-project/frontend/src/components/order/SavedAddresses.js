@@ -1,4 +1,4 @@
-const SavedAddresses = ({ showNewAddressForm, onCheckedChange }) => {
+const SavedAddresses = ({ user, showNewAddressForm, onCheckedChange }) => {
 
     const manageShowNewAddressForm = (event) => {
         showNewAddressForm = !showNewAddressForm;
@@ -10,9 +10,9 @@ const SavedAddresses = ({ showNewAddressForm, onCheckedChange }) => {
         <h4 className="mb-30" style={{ color: '#FFFFFF' }}>Запазени адреси</h4>
         <div className="default-select" id="default-select">
             <select className="nice-select" disabled={showNewAddressForm}>
-                <option className="list option" value=" 1">гр. София, Бул. България 120</option>
-                <option className="list option" value="1">гр. Бургас, ЖК. Лазур</option>
-                <option className="list option" value="1">гр. Варна, ул. Русалка 9</option>
+                {user.addresses.map((address)=>(
+                    <option className="list option" value={address.id}>{address.city}, {address.address}, {address.description}</option>
+                ))}
             </select>
         </div>
         <div className="switch-wrap d-flex mt-20 align-baseline">
