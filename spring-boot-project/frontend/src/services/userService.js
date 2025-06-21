@@ -11,7 +11,7 @@ export const logout = () => {
 }
 
 export const getUserProfile = () => {
-  return axios.post("/user/profile");
+  return axios.get("/user/profile");
 }
 
 export const register = (user) => {
