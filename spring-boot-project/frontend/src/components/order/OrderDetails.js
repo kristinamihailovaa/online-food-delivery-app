@@ -21,7 +21,7 @@ const OrderDetails = () => {
             <div className="container box_1170">
                 <div className="section-top-border">
                     <h2 className="mb-30 cart-title">Адрес за доставка</h2>
-                    {user && <SavedAddresses user={user} showNewAddressForm={isNewAddressChecked} onCheckedChange={handleCheckedChange} />}
+                    {!user ?? <SavedAddresses user={user} showNewAddressForm={isNewAddressChecked} onCheckedChange={handleCheckedChange} />}
                 </div>
 
                 <NewAddressForm isVisible={isNewAddressChecked || !user} />
