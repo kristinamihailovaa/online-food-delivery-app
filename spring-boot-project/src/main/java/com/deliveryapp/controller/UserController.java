@@ -30,13 +30,9 @@ public class UserController {
         this.sessionManager = sessionManager;
     }
 
-    @RequestMapping("/")
-    public String index() {
-        return "Greetings from Spring Boot!";
-    }
-
-    @PostMapping("/users/login")
-    public ResponseEntity<?> login(@RequestBody @Valid LoginRequestUserDTO dto, HttpServletRequest request) {
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequestUserDTO dto, HttpServletRequest request) {
         try {
             User user = userService.authenticateUser(dto);
             sessionManager.loginUser(request, user.getId());
@@ -72,17 +68,16 @@ public class UserController {
         }
     }
 
-    @GetMapping("/user/profile")
-    public ResponseEntity<?> getProfile(HttpSession session) {
-        Long loggedUserId = (Long) session.getAttribute("logged_user_id");
+    @GetMapping("/profile")
+    public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
+        Long userId = (Long) request.getSession().getAttribute("userId");
 
-        if (loggedUserId == null) {
+        if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("You need to be logged in to view the profile.");
         }
-
         try {
-            UserWithoutPasswordDto userprofileDto = userService.getProfile(loggedUserId);
+            UserWithoutPasswordDto userprofileDto = userService.getProfile(userId);
             return ResponseEntity.ok(userprofileDto);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -90,8 +85,9 @@ public class UserController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid RegistrationRequestDto dto, HttpSession session) throws IllegalAccessException, BadRequestException {
+    public ResponseEntity<?> register(@RequestBody RegistrationRequestDto dto, HttpSession session) {
         try {
             userService.registerUser(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
