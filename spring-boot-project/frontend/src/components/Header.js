@@ -34,7 +34,7 @@ const Header = () => {
                                             <li><Link to="/menu" className={currentPath.includes('/menu') ? 'active' : ''}>Меню</Link></li>
                                             <li><Link to="/about" className={currentPath.includes('/about') ? 'active' : ''}>За нас</Link></li>
                                             <li><Link to="/contact" className={currentPath.includes('/contact') ? 'active' : ''}>Контакти</Link></li>
-                                            {user && <li><Link to="/myOrders" className={currentPath.includes('/myOrders') ? 'active' : ''}>Моите поръчки</Link></li>}
+                                            {!user ?? <li><Link to="/myOrders" className={currentPath.includes('/myOrders') ? 'active' : ''}>Моите поръчки</Link></li>}
                                         </ul>
                                     </nav>
                                 </div>
