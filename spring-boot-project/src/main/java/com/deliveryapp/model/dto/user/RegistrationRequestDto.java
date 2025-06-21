@@ -11,9 +11,9 @@ public class RegistrationRequestDto {
     @Email(message = "Invalid email format.")
     private String email;
     @NotBlank(message = "Firstname is mandatory!")
-    private String firstname;
+    private String firstName;
     @NotBlank(message = "Lastname is mandatory!")
-    private String lastname;
+    private String lastName;
     @NotBlank(message = "Password is mandatory!")
     private String password;
     @NotBlank(message = "Password confirmation is mandatory!")

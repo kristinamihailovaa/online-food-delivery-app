@@ -63,7 +63,7 @@ public class UserService {
         }
     }
 
-    public RegistrationResponseUserDto registerUser(RegistrationRequestDto dto) throws BadRequestException {
+    public void registerUser(RegistrationRequestDto dto) throws BadRequestException {
         Optional<User> userFromDb = userRepository.findByEmail(dto.getEmail());
 
         if (userFromDb.isPresent()) {
@@ -80,8 +80,8 @@ public class UserService {
             throw new BadRequestException("Passwords mismatch!");
         }
         User user = new User();
-        user.setFirstName(dto.getFirstname());
-        user.setLastName(dto.getLastname());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
         user.setUsername(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setEmail(dto.getEmail());
@@ -89,7 +89,7 @@ public class UserService {
         user.setAdmin(dto.isAdmin());
         userRepository.save(user);
 
-        return new RegistrationResponseUserDto(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.isAdmin());
+        new RegistrationResponseUserDto(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.isAdmin());
 
     }
 
