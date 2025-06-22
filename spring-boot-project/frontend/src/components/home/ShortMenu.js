@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getcategories } from "../../services/categoryService";
+import { getAllCategories } from "../../services/categoryService";
 import { getItemsByCategory } from "../../services/itemService";
 
 const ShortMenu = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getcategories()
+        getAllCategories()
         .then((categoryResult) => {            
             getItemsByCategory(categoryResult.data[0].id)
             .then((result) => {            

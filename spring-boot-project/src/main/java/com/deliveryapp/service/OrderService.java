@@ -32,13 +32,11 @@ public class OrderService {
     }
 
 
-    public List<OrderDto> getAllOrders(User loggedUser) {
+    public List<OrderDto> getOrdersByUser(User loggedUser) {
         List<Order> orders = orderRepository.findAllByBuyer(loggedUser);
-        if (orders.isEmpty()) {
-            throw new EntityNotFoundException("User has no orders!");
-    }
         return orders.stream().map(OrderDto::new).toList();
     }
+
 
     @Transactional
     public OrderDto createOrder(CreateOrderDto dto, User loggedUser) {

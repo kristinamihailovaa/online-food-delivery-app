@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getcategories } from "../../services/categoryService";
+import { getAllCategories } from "../../services/categoryService";
 import { useEffect, useState } from "react";
 import { createItem, getItemById, updateItem } from "../../services/itemService";
 
@@ -8,7 +8,7 @@ const NewProductForm = ({itemId}) => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        getcategories()
+        getAllCategories()
         .then((result) => {            
             setCategories(result.data);
         });
