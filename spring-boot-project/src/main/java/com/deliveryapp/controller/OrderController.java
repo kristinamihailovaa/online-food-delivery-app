@@ -6,6 +6,7 @@ import com.deliveryapp.model.dto.order.OrderDto;
 import com.deliveryapp.service.OrderService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders")
-    List<OrderDto> getAllOrders(HttpServletRequest request) throws AuthenticationException {
-        return orderService.getAllOrders(sessionManager.getLoggedUser(request));
+    List<OrderDto> getAllOrdersForUser(HttpServletRequest request) throws AuthenticationException {
+        return orderService.getOrdersByUser(sessionManager.getLoggedUser(request));
     }
 }

@@ -70,7 +70,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public ResponseEntity<?> getUserProfile(HttpServletRequest request) {
-        Long userId = (Long) request.getSession().getAttribute("userId");
+        Long userId = (Long) request.getSession().getAttribute("logged_user_id");
 
         if (userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

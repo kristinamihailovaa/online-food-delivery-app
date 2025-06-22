@@ -4,7 +4,7 @@ axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 
 export const getItemsByCategory = (categoryId) => {
   // return axios.get(`items`);
-  return axios.get(`category/${categoryId}`);
+  return axios.get(`/category/${categoryId}`);
 }
 
 export const deleteItem = (itemId) => {

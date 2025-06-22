@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { deleteItem, getItemsByCategory } from "../../services/itemService";
-import { getcategories } from '../../services/categoryService';
+import { getAllCategories } from '../../services/categoryService';
 
 const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -11,7 +11,7 @@ const Products = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     
     useEffect(() => {
-        getcategories()
+        getAllCategories()
         .then((result) => {            
             setCategories(result.data);
             setSelectedCategory(result.data[0].id)
