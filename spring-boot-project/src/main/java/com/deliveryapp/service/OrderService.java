@@ -40,34 +40,36 @@ public class OrderService {
 
     @Transactional
     public OrderDto createOrder(CreateOrderDto dto, User loggedUser) {
-
+        // Създаване на поръчка
         Order order = new Order();
-        order.setBuyer(loggedUser);
+        order.setBuyer(loggedUser); // user_id
         order.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
-//        order.setStatus("CREATED");
+        order.setStatus(OrderStatus.CREATED); // или каквото е по твоя enum/таблица
+        order.setTotalAmount(BigDecimal.ZERO); // ще се сметне после
+
+        // Запазваме поръчката, за да имаме ID
+        order = orderRepository.save(order);
 
         BigDecimal totalAmount = BigDecimal.ZERO;
-        order = orderRepository.save(order); // трябва ни ID-то на order преди да добавим продукти
 
-        for (CreateOrderDto.ItemQuantity itemDto : dto.getItemIds()) {
+        for (CreateOrderDto.ItemQuantity itemDto : dto.getItems()) {
             Item item = itemRepository.findById(itemDto.getItemId())
-                    .orElseThrow(() -> new EntityNotFoundException("Item not found: " + itemDto.getItemId()));
+                    .orElseThrow(() -> new EntityNotFoundException("Артикул с ID " + itemDto.getItemId() + " не съществува."));
 
             int quantity = itemDto.getQuantity();
-            BigDecimal subtotal = BigDecimal.valueOf(item.getPrice() * quantity);
+            BigDecimal subtotal = BigDecimal.valueOf(item.getPrice()).multiply(BigDecimal.valueOf(quantity));
             totalAmount = totalAmount.add(subtotal);
 
             OrderedItem orderedItem = new OrderedItem();
             orderedItem.setOrder(order);
             orderedItem.setItem(item);
             orderedItem.setQuantity(quantity);
-
             orderedItemRepository.save(orderedItem);
         }
 
         order.setTotalAmount(totalAmount);
         orderRepository.save(order);
-        return new OrderDto(order);
+
+        return new OrderDto(order); // предполагаме, че DTO съдържа нужната информация
     }
 }
-
