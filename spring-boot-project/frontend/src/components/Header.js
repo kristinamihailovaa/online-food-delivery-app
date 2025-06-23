@@ -15,10 +15,23 @@ const Header = () => {
         }
     };
 
-    const logoutuser = () => {
-        logout();
-        localStorage.removeItem("user");
-        navigate("/");
+    const logoutuser = async () => {
+        try {
+            await logout();
+            localStorage.removeItem("user");
+            navigate("/menu");
+        } catch (err) {
+            if (err.response) {
+                console.error("Грешка от сървъра:", err.response.data);
+                alert(`Грешка: ${err.response.data}`);
+            } else if (err.request) {
+                console.error("Няма отговор от сървъра.");
+                alert("Няма връзка със сървъра.");
+            } else {
+                console.error("Грешка при извикване:", err.message);
+                alert("Грешка при извикване на logout.");
+            }
+        }
     };
 
     return (

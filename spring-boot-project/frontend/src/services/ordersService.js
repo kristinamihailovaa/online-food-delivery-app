@@ -7,5 +7,5 @@ export const getAllOrdersForUser = () => {
 }
 
 export const createOrder = () => {
-  return axios.post(`oders`);
+  return axios.post(`/orders`);
 }

@@ -102,10 +102,9 @@ public class UserController {
     public ResponseEntity<String> logout(HttpSession session) {
         try {
             sessionManager.logoutUser(session);
-            return ResponseEntity.ok("Successfully logged out");
+            return ResponseEntity.ok("Logout successful.");
         } catch (BadRequestException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
