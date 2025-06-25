@@ -16,6 +16,9 @@ import java.util.stream.Collectors;
 @Service
 public class ItemService {
 
+    @Value("${filePath}")
+    private String basePath;
+
     private final CategoryRepository categoryRepository;
 
     private final ItemRepository itemRepository;
@@ -30,21 +33,27 @@ public class ItemService {
         Category category = categoryRepository.findById(itemDto.getCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
+        String imageUrl = uploadFile(itemDto.image);
+
         Item item = new Item();
         item.setName(itemDto.getName());
         item.setDescription(itemDto.getDescription());
         item.setPrice(itemDto.getPrice());
         item.setCategory(category);
+        item.setImageUrl(imageUrl);
 
         return itemRepository.save(item);
     }
 
     public ResponseItemDto editItem(RequestItemDto itemDto, long id) {
+        String imageUrl = uploadFile(itemDto.image);
+
         Item item = itemRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found"));
         item.setName(itemDto.getName());
         item.setDescription(itemDto.getDescription());
         item.setPrice(itemDto.getPrice());
+        item.setImageUrl(imageUrl);
 
         return modelMapper.map(itemRepository.save(item), ResponseItemDto.class);
 
@@ -86,4 +95,23 @@ public class ItemService {
                 item.getDescription()
         );
     }
+
+    private String uploadFile(MultipartFile multipartFile) {
+        String fileName = java.util.UUID.randomUUID().toString();
+        File dir = new File(basePath+fileName);
+
+        if(dir.exists()){
+            return "EXIST";
+        }
+
+        Path path = Path.of(basePath+fileName);
+
+        try{
+            Files.copy(multipartFile.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            return path;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return "FAILED";
+    }   
 }

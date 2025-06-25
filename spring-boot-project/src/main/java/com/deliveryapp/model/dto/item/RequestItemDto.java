@@ -24,4 +24,6 @@ public class RequestItemDto {
     private int quantity;
 
     private String description;
+
+    private MultipartFile image;
 }

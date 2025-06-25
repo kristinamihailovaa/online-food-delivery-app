@@ -28,6 +28,11 @@ const NewProductForm = ({itemId}) => {
         setItem(changedItem);
     }
 
+    const changeImage = (event) =>{
+        const changedItem = {...item, image:event.target.files[0]};
+        setItem(changedItem);
+    }
+
     const onSubmit = () => {
         if(itemId){
             updateItem(item);
@@ -49,7 +54,8 @@ const NewProductForm = ({itemId}) => {
                 <input type="text" name="quantity" placeholder="Количество *" defaultValue={item.quantity} onChange={changeItem} required className="single-input pl-20" />
             </div>
             <div className="input-group-icon mt-10">
-                <input type="string" name="imageUrl" placeholder="Адрес на изображението (URL) *" defaultValue={item.imageUrl} onChange={changeItem} required className="single-input pl-20" />
+                {/* <input type="string" name="imageUrl" placeholder="Адрес на изображението (URL) *" defaultValue={item.imageUrl} onChange={changeItem} required className="single-input pl-20" /> */}
+                <input type='file' id='file' accept="image/*" onChange={changeImage} />
             </div>
             <div className="mt-10">
                 <textarea className="single-textarea" name="description" placeholder="Кратко описание" defaultValue={item.description} onChange={changeItem} required rows="2"></textarea>
