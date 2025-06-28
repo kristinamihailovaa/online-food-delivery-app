@@ -6,7 +6,9 @@ import { getAllCategories } from '../../services/categoryService';
 const Products = () => {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [products, setProducts] = useState([]);
+    const [shownProducts, setShownProducts] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [searchWord, setSearchWord] = useState("");
 
     const user = JSON.parse(localStorage.getItem('user'));
     
@@ -22,6 +24,8 @@ const Products = () => {
         getItemsByCategory(selectedCategory)
         .then((result) => {            
             setProducts(result.data);
+            setShownProducts(result.data);
+            setSearchWord("");
         });
     }, [selectedCategory]);
 
@@ -35,6 +39,7 @@ const Products = () => {
                   p.id !== itemId
                 )
         setProducts(newProducts)
+        setShownProducts(newProducts);
     };
 
     const addToCart = (product) => { 
@@ -52,6 +57,14 @@ const Products = () => {
 
         localStorage.setItem('products', JSON.stringify(cart));
     };
+
+    const makeSearch = ()=>{
+        if(searchWord !== ""){
+            const searchedProducts = products.filter(p=>p.name.includes(searchWord))
+            setShownProducts(searchedProducts);
+        }
+        setShownProducts(products);
+    }
 
     return <div>
         <div className="bradcam_area breadcam_bg overlay">
@@ -73,9 +86,9 @@ const Products = () => {
                             <form action="#">
                                 <div className="form-group">
                                     <div className="input-group mb-3">
-                                        <input type="text" className="form-control" placeholder='Търси...' />
+                                        <input type="text" className="form-control" defaultValue={searchWord} placeholder='Търси...' onChange={(e)=>{setSearchWord(e.target.value)}}/>
                                         <div className="input-group-append">
-                                            <button className="btn boxed-btn3" style={{ borderRadius: '3px' }} type="button"><i className="ti-search"></i></button>
+                                            <button className="btn boxed-btn3" style={{ borderRadius: '3px' }} type="button" onClick={makeSearch}><i className="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +114,7 @@ const Products = () => {
                     </div>
                 </div>
                 <div className="row">
-                    {products.map((product)=>(
+                    {shownProducts.map((product)=>(
                         <div className="col-xl-6 col-md-6 col-lg-6">
                             <div className="single_delicious d-flex align-items-center">
                                 <div className="thumb">
